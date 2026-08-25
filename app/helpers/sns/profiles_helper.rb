@@ -1,0 +1,2 @@
+module Sns::ProfilesHelper
+end

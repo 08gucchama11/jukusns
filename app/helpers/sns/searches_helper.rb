@@ -1,0 +1,2 @@
+module Sns::SearchesHelper
+end
