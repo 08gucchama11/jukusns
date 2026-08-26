@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_08_25_003159) do
+ActiveRecord::Schema[8.0].define(version: 2026_08_25_234933) do
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -76,6 +76,19 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_25_003159) do
     t.index ["sns_profile_id"], name: "index_posts_on_sns_profile_id"
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.integer "admin_id"
+    t.integer "teacher_id"
+    t.integer "student_id"
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_id"], name: "index_sessions_on_admin_id"
+    t.index ["student_id"], name: "index_sessions_on_student_id"
+    t.index ["teacher_id"], name: "index_sessions_on_teacher_id"
+  end
+
   create_table "sns_profiles", force: :cascade do |t|
     t.integer "student_id"
     t.integer "teacher_id"
@@ -124,6 +137,9 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_25_003159) do
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "sns_profiles"
   add_foreign_key "posts", "sns_profiles"
+  add_foreign_key "sessions", "admins"
+  add_foreign_key "sessions", "students"
+  add_foreign_key "sessions", "teachers"
   add_foreign_key "sns_profiles", "students"
   add_foreign_key "sns_profiles", "teachers"
 end

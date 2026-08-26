@@ -1,5 +1,22 @@
 Rails.application.routes.draw do
 
+  root "students/sessions#new"
+
+  post "/", to: "students/sessions#create"
+  delete "/", to: "students/sessions#destroy"
+
+  get "teachers", to: "teachers/sessions#new", as: :new_teacher_session
+  post "teachers", to: "teachers/sessions#create", as: :teacher_session
+  delete "teachers", to: "teachers/sessions#destroy"
+
+  get "admin", to: "admin/sessions#new", as: :new_admin_session
+  post "admin", to: "admin/sessions#create", as: :admin_session
+  delete "admin", to: "admin/sessions#destroy"
+
+  get "dashboard", to: "students/dashboards#index"
+  get "teachers/dashboard", to: "teachers/dashboards#index"
+  get "admin/dashboard", to: "admin/dashboards#index"
+
   get "admin/dashboard", to: "admin/dashboards#index"
   get "teachers/dashboard", to: "teachers/dashboards#index"
   get "dashboard", to: "students/dashboards#index"

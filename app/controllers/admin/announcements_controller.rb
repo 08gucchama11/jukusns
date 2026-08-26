@@ -1,4 +1,4 @@
-class Admin::AnnouncementsController < ApplicationController
+class Admin::AnnouncementsController < Admin::ApplicationController
   def index
   end
 
