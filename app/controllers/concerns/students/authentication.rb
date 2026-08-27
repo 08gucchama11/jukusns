@@ -15,7 +15,7 @@ module Students::Authentication
   private
     def authenticated?
       resume_session
-      Curreent.student.present?
+      Current.student.present?
     end
 
     def require_authentication

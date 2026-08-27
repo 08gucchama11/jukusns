@@ -1,7 +1,7 @@
 <%= tag.div(flash[:alert], style: "color: red") if flash[:alert] %>
 <%= tag.div(flash[:notice], style: "color: green") if flash[:notice] %>
 
-<%= form_with url: admin_session_path do |form| %>
+<%= form_with url: session_path do |form| %>
   <div>
     <%= form.label :code, "生徒コード" %>
     <%= form.text_field :code, required: true, autofocus: true, autocomplete: "username", value: params[:code] %>

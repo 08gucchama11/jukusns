@@ -1,35 +1,26 @@
 Rails.application.routes.draw do
 
-  root "students/sessions#new"
+  scope module: :students do
+    root "sessions#new"
+    resource :session, path: "", only: %i[create destroy]
+    get "dashboard", to: "dashboards#index"
+  end
 
-  post "/", to: "students/sessions#create"
-  delete "/", to: "students/sessions#destroy"
+  namespace :teachers do
+    get "/", to: "sessions#new", as: :login
+    resource :session, path: "", only: %i[create destroy]
+    get "dashboard", to: "dashboards#index"
+  end
 
-  get "teachers", to: "teachers/sessions#new", as: :new_teacher_session
-  post "teachers", to: "teachers/sessions#create", as: :teacher_session
-  delete "teachers", to: "teachers/sessions#destroy"
+  namespace :admin do
+    get "/", to: "sessions#new", as: :login
+    resource :session, path: "", only: %i[create destroy]
+    get "dashboard", to: "dashboards#index"
+    resources :instruction_records, only: %i[index]
+    resources :posts, only: %i[index show destroy]
+    resources :students, only: %i[index new create show edit update]
+    resources :teachers, only: %i[index new create show edit update]
+    resources :announcements, only: %i[index create]
+  end
 
-  get "admin", to: "admin/sessions#new", as: :new_admin_session
-  post "admin", to: "admin/sessions#create", as: :admin_session
-  delete "admin", to: "admin/sessions#destroy"
-
-  get "dashboard", to: "students/dashboards#index"
-  get "teachers/dashboard", to: "teachers/dashboards#index"
-  get "admin/dashboard", to: "admin/dashboards#index"
-
-  get "admin/dashboard", to: "admin/dashboards#index"
-  get "teachers/dashboard", to: "teachers/dashboards#index"
-  get "dashboard", to: "students/dashboards#index"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
-
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end

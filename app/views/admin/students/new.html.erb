@@ -1,0 +1,69 @@
+<h1>生徒登録フォーム</h1>
+
+<%= form_with model: [:admin, @student], url: admin_students_path do |f| %>
+
+  <div class="field">
+    <%= f.label :name, "氏名" %><br>
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :code, "生徒コード" %><br>
+    <%= f.text_field :code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, "パスワード" %><br>
+    <%= f.text_field :password %>
+  </div>
+
+  <div class="field">
+    <%= f.label :school, "学校名" %><br>
+    <%= f.text_field :school %>
+  </div>
+
+  <div class="field">
+    <%= f.label :grade, "学年" %>
+    <%= f.select :grade,
+      [["中学1年", 1], ["中学2年", 2], ["中学3年", 3],
+      ["高校1年", 4], ["高校2年", 5], ["高校3年", 6]] %>
+  </div>
+
+  <div class="field">
+    <%= f.label :postal_code, "郵便番号" %><br>
+    <%= f.text_field :postal_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address, "住所" %><br>
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :telephone_number, "電話番号" %><br>
+    <%= f.text_field :telephone_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :parent_name, "保護者氏名" %><br>
+    <%= f.text_field :parent_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :parent_telephone_number, "保護者電話番号" %><br>
+    <%= f.text_field :parent_telephone_number %>
+  </div>
+
+  <div class="field">
+    <%= f.radio_button :is_active, true, checked: true %>
+    <%= f.label :is_active_true, "在籍中" %>
+
+    <%= f.radio_button :is_active, false %>
+    <%= f.label :is_active_false, "退会済み" %>
+  </div>
+
+  <div class="action">
+    <%= f.submit "新規登録" %>
+  </div>
+
+<% end %>
