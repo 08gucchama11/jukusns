@@ -1,0 +1,37 @@
+<h1>講師登録フォーム</h1>
+
+<%= form_with model: [:admin, @teacher], url: admin_teachers_path do |f| %>
+
+  <div class="field">
+    <%= f.label :name, "氏名" %><br>
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :code, "講師コード" %><br>
+    <%= f.text_field :code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, "パスワード" %><br>
+    <%= f.text_field :password %>
+  </div>
+
+  <div class="field">
+    <%= f.label :telephone_number, "電話番号" %><br>
+    <%= f.text_field :telephone_number %>
+  </div>
+
+  <div class="field">
+    <%= f.radio_button :is_active, true, checked: true %>
+    <%= f.label :is_active_true, "在籍中" %>
+
+    <%= f.radio_button :is_active, false %>
+    <%= f.label :is_active_false, "退職済み" %>
+  </div>
+
+  <div class="action">
+    <%= f.submit "新規登録" %>
+  </div>
+
+<% end %>

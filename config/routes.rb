@@ -4,12 +4,16 @@ Rails.application.routes.draw do
     root "sessions#new"
     resource :session, path: "", only: %i[create destroy]
     get "dashboard", to: "dashboards#index"
+    resources :announcements, only: %i[index]
+    resources :instruction_records, only: %i[index show]
   end
 
   namespace :teachers do
     get "/", to: "sessions#new", as: :login
     resource :session, path: "", only: %i[create destroy]
     get "dashboard", to: "dashboards#index"
+    resources :students, only: %i[index show]
+    resources :instruction_records, only: %i[index new create show edit update]
   end
 
   namespace :admin do
