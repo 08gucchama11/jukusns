@@ -1,0 +1,20 @@
+<h1>生徒詳細</h1>
+
+<% grade_labels = {
+  1 => "中学1年", 2 => "中学2年", 3 => "中学3年",
+  4 => "高校1年", 5 => "高校2年", 6 => "高校3年"
+} %>
+
+<p>氏名：<%= @student.name %></p>
+<p>生徒コード：<%= @student.code %></p>
+<p>学校名：<%= @student.school %></p>
+<p>学年：<%= grade_labels[@student.grade] %></p>
+<p>郵便番号：<%= @student.postal_code %></p>
+<p>住所：<%= @student.address %></p>
+<p>電話番号：<%= @student.telephone_number %></p>
+<p>保護者氏名：<%= @student.parent_name %></p>
+<p>保護者電話番号：<%= @student.parent_telephone_number %></p>
+<p>在籍ステータス：<%= @student.is_active ? "在籍中" : "退会済み" %></p>
+
+<%= link_to "編集", edit_admin_student_path(@student) %>
+<%= link_to "生徒一覧へ戻る", admin_students_path %>

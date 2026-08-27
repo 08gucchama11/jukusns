@@ -1,2 +1,27 @@
-<h1>Admin::Announcements#index</h1>
-<p>Find me in app/views/admin/announcements/index.html.erb</p>
+<h1>お知らせ一覧</h1>
+
+<%= form_with model: [:admin, @announcement] do |f| %>
+  <div class="field">
+    <%= f.label :title, "タイトル" %><br>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :body, "お知らせ本文" %><br>
+    <%= f.text_area :body %>
+  </div>
+
+  <div class="action">
+    <%= f.submit "新規登録" %>
+  </div>
+<% end %>
+
+<% @announcements.each do |announcement| %>
+  <article>
+    <h2><%= announcement.title %></h2>
+    <p><%= announcement.body %></p>
+    <small>
+      投稿日時：<%= announcement.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+    </small>
+  </article>
+<% end %>
