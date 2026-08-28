@@ -1,0 +1,36 @@
+<h1>講師情報編集</h1>
+
+<%= form_with model: [:admin, @teacher] do |f| %>
+
+  <div class="field">
+    <%= f.label :name, "氏名" %><br>
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :code, "生徒コード" %><br><%= @teacher.code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, "パスワード(変更する場合のみ入力)" %><br>
+    <%= f.text_field :password %>
+  </div>
+
+  <div class="field">
+    <%= f.label :telephone_number, "電話番号" %><br>
+    <%= f.text_field :telephone_number %>
+  </div>
+
+  <div class="field">
+    <%= f.radio_button :is_active, true %>
+    <%= f.label :is_active_true, "在籍中" %>
+
+    <%= f.radio_button :is_active, false %>
+    <%= f.label :is_active_false, "退会済み" %>
+  </div>
+
+  <div class="action">
+    <%= f.submit "編集" %>
+  </div>
+
+<% end %>

@@ -8,8 +8,7 @@ class Admin::TeachersController < Admin::ApplicationController
   end
 
   def create
-    @teacher = Teacher.new(teacher_params)
-
+    @teacher = Teacher.new(create_teacher_params)
     if @teacher.save
       redirect_to admin_teachers_path
     else
@@ -28,7 +27,10 @@ class Admin::TeachersController < Admin::ApplicationController
   def update
     @teacher = Teacher.find(params[:id])
 
-    if @teacher.update(teacher_params)
+    attributes = update_teacher_params
+    attributes.delete(:password) if attributes[:password].blank?
+    
+    if @teacher.update(attributes)
       redirect_to admin_teacher_path(@teacher)
     else
       render :edit, status: :unprocessable_entity
@@ -37,10 +39,17 @@ class Admin::TeachersController < Admin::ApplicationController
 
   private
 
-  def teacher_params
+  def create_teacher_params
     params.require(:teacher).permit(
       :name, :code, :password, :password_confirmation,
       :telephone_number, :is_active
     )
   end
+
+  def update_teacher_params
+    params.require(:teacher).permit(
+      :name, :password, :telephone_number, :is_active
+    )
+  end
+
 end

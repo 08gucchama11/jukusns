@@ -1,0 +1,9 @@
+<h1>講師詳細</h1>
+
+<p>氏名：<%= @teacher.name %></p>
+<p>講師コード：<%= @teacher.code %></p>
+<p>電話番号：<%= @teacher.telephone_number %></p>
+<p>在籍ステータス：<%= @teacher.is_active ? "在籍中" : "退職済み" %></p>
+
+<%= link_to "編集", edit_admin_teacher_path(@teacher) %>
+<%= link_to "講師一覧へ戻る", admin_teachers_path %>
