@@ -1,5 +1,17 @@
 <h1>生徒情報編集</h1>
 
+<% if @student.errors.any? %>
+  <div class="alert alert-danger">
+    <p><%= @student.errors.count %>件のエラーが発生しました</p>
+
+    <ul class="mb-0">
+      <% @student.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_with model: [:admin, @student] do |f| %>
 
   <div class="field">

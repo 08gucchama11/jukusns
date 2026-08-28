@@ -1,5 +1,17 @@
 <h1>講師登録フォーム</h1>
 
+<% if @teacher.errors.any? %>
+  <div class="alert alert-danger">
+    <p><%= @teacher.errors.count %>件のエラーが発生しました</p>
+
+    <ul class="mb-0">
+      <% @teacher.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_with model: [:admin, @teacher], url: admin_teachers_path do |f| %>
 
   <div class="field">
