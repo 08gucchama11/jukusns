@@ -10,7 +10,7 @@ class Admin::TeachersController < Admin::ApplicationController
   def create
     @teacher = Teacher.new(create_teacher_params)
     if @teacher.save
-      redirect_to admin_teachers_path
+      redirect_to admin_teachers_path, notice: "講師情報の登録に成功しました。"
     else
       render :new, status: :unprocessable_entity
     end
@@ -31,7 +31,7 @@ class Admin::TeachersController < Admin::ApplicationController
     attributes.delete(:password) if attributes[:password].blank?
     
     if @teacher.update(attributes)
-      redirect_to admin_teacher_path(@teacher)
+      redirect_to admin_teacher_path(@teacher), notice: "講師情報の更新に成功しました。"
     else
       render :edit, status: :unprocessable_entity
     end

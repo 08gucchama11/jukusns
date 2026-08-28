@@ -4,19 +4,6 @@
       <div class="card shadow">
         <div class="card-body p-4">
           <h1 class="card-title text-center mb-4">管理者ログイン</h1>
-
-          <% if flash[:alert] %>
-            <div class="alert alert-danger">
-              <%= flash[:alert] %>
-            </div>
-          <% end %>
-
-          <% if flash[:notice] %>
-            <div class="alert alert-success">
-              <%= flash[:notice] %>
-            </div>
-          <% end %>
-
           <%= form_with url: admin_session_path do |form| %>
             <div class="mb-3">
               <%= form.label :code, "管理者コード", class: "form-label" %>

@@ -11,7 +11,7 @@ class Admin::StudentsController < Admin::ApplicationController
     @student = Student.new(create_student_params)
 
     if @student.save
-      redirect_to admin_students_path
+      redirect_to admin_students_path, notice: "生徒情報の登録に成功しました。"
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,7 +32,7 @@ class Admin::StudentsController < Admin::ApplicationController
     attributes.delete(:password) if attributes[:password].blank?
 
     if @student.update(attributes)
-      redirect_to admin_student_path(@student)
+      redirect_to admin_student_path(@student), notice: "生徒情報の更新に成功しました。"
     else
       render :edit, status: :unprocessable_entity
     end

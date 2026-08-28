@@ -8,14 +8,14 @@ class Admin::SessionsController < Admin::ApplicationController
   def create
     if admin = Admin.authenticate_by(params.permit(:code, :password))
       start_new_session_for admin
-      redirect_to after_authentication_url
-    else
+      redirect_to after_authentication_url, notice: "ログインに成功しました。"
+        else
       redirect_to admin_login_path, alert: "コードまたはパスワードが違います。"
     end
   end
 
   def destroy
     terminate_session
-    redirect_to admin_login_path
+    redirect_to admin_login_path, notice: "ログアウトに成功しました。"
   end
 end

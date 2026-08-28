@@ -8,7 +8,7 @@ class Admin::AnnouncementsController < Admin::ApplicationController
     @announcement = Announcement.new(announcement_params)
 
     if @announcement.save
-      redirect_to admin_announcements_path
+      redirect_to admin_announcements_path, notice: "お知らせの登録に成功しました。"
     else
       @announcements = Announcement.all
       render :index, status: :unprocessable_entity
