@@ -1,27 +1,36 @@
-<h1>お知らせ一覧</h1>
-
-<%= form_with model: [:admin, @announcement] do |f| %>
-  <div class="field">
-    <%= f.label :title, "タイトル" %><br>
-    <%= f.text_field :title %>
+<div class="container">
+  <div class="row text-center">
+    <div class="col-12">
+      <h1>お知らせ一覧</h1>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :body, "お知らせ本文" %><br>
-    <%= f.text_area :body %>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6">
+      <h2>お知らせ入力フォーム</h2>
+      <%= form_with model: [:admin, @announcement] do |f| %>
+        <div class="field">
+          <%= f.label :title, "タイトル" %><br>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+        <div class="field">
+          <%= f.label :body, "お知らせ本文" %><br>
+          <%= f.text_area :body, class: "form-control" %>
+        </div>
+        <div class="action">
+          <%= f.submit "新規登録", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <div class="action">
-    <%= f.submit "新規登録" %>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6">
+      <% @announcements.each do |announcement| %>
+        <article>
+          <h2><%= announcement.title %></h2>
+          <p><%= announcement.body %></p>
+          <small>投稿日時：<%= announcement.created_at.strftime("%Y年%m月%d日 %H:%M") %></small>
+        </article>
+      <% end %>
+    </div>
   </div>
-<% end %>
-
-<% @announcements.each do |announcement| %>
-  <article>
-    <h2><%= announcement.title %></h2>
-    <p><%= announcement.body %></p>
-    <small>
-      投稿日時：<%= announcement.created_at.strftime("%Y年%m月%d日 %H:%M") %>
-    </small>
-  </article>
-<% end %>
+</div>
