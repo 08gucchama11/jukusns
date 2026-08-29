@@ -1,81 +1,99 @@
-<h1>生徒登録フォーム</h1>
+<div class="container">
+  <div class="row justify-content-center mt-3">
+    <div class="col-xl-10">
+      <h1>生徒情報登録</h1>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <% if @student.errors.any? %>
+      <div class="col-xl-10">
+        <div class="alert alert-danger">
+          <p><%= @student.errors.count %>件のエラーが発生しました</p>
+          <ul class="mb-0">
+            <% @student.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-xl-10">
+      <%= link_to "生徒一覧へ戻る", admin_students_path, class: "btn btn-success" %>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <div class="col-xl-10">
+      <%= form_with model: [:admin, @student] do |f| %>
 
-<% if @student.errors.any? %>
-  <div class="alert alert-danger">
-    <p><%= @student.errors.count %>件のエラーが発生しました</p>
+      <div class="field mb-3">
+        <%= f.label :name, "氏名" %><br>
+        <%= f.text_field :name, autofocus: true, class: "form-control w-25" %>
+      </div>
 
-    <ul class="mb-0">
-      <% @student.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <div class="field mb-3">
+          <%= f.label :code, "生徒コード" %><br>
+          <%= f.text_field :code, class: "form-control w-25" %>
+        </div>
+
+      <div class="field mb-3">
+        <%= f.label :password, "パスワード" %><br>
+        <%= f.text_field :password, class: "form-control w-25" %>
+      </div>
+
+      <div class="field mb-3">
+        <%= f.label :school, "学校名" %><br>
+        <%= f.text_field :school, class: "form-control w-50" %>
+      </div>
+
+      <div class="field mb-3">
+        <%= f.label :grade, "学年" %>
+        <%= f.select :grade,
+          [["中学1年", 1], ["中学2年", 2], ["中学3年", 3],
+          ["高校1年", 4], ["高校2年", 5], ["高校3年", 6]],
+          {},
+          class: "form-select w-25" %>
+      </div>
+
+      <div class="field mb-3">
+        <%= f.label :postal_code, "郵便番号" %><br>
+        <%= f.text_field :postal_code, class: "form-control w-25" %>
+      </div>
+
+      <div class="field mb-3">
+        <%= f.label :address, "住所" %><br>
+        <%= f.text_field :address, class: "form-control w-50" %>
+      </div>
+
+      <div class="field mb-3">
+        <%= f.label :telephone_number, "電話番号" %><br>
+        <%= f.text_field :telephone_number, class: "form-control w-25" %>
+      </div>
+
+      <div class="field mb-3">
+        <%= f.label :parent_name, "保護者氏名" %><br>
+        <%= f.text_field :parent_name, class: "form-control w-25" %>
+      </div>
+
+      <div class="field mb-3">
+        <%= f.label :parent_telephone_number, "保護者電話番号" %><br>
+        <%= f.text_field :parent_telephone_number, class: "form-control w-25" %>
+      </div>
+
+      <div class="field mb-3">
+        <%= f.radio_button :is_active, true %>
+        <%= f.label :is_active_true, "在籍中" %>
+
+        <%= f.radio_button :is_active, false %>
+        <%= f.label :is_active_false, "退会済み" %>
+      </div>
+
+      <div class="action mt-3">
+        <%= f.submit "登録", class: "btn btn-primary" %>
+      </div>
+
       <% end %>
-    </ul>
+    </div>
   </div>
-<% end %>
-
-<%= form_with model: [:admin, @student], url: admin_students_path do |f| %>
-
-  <div class="field">
-    <%= f.label :name, "氏名" %><br>
-    <%= f.text_field :name, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :code, "生徒コード" %><br>
-    <%= f.text_field :code %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password, "パスワード" %><br>
-    <%= f.text_field :password %>
-  </div>
-
-  <div class="field">
-    <%= f.label :school, "学校名" %><br>
-    <%= f.text_field :school %>
-  </div>
-
-  <div class="field">
-    <%= f.label :grade, "学年" %>
-    <%= f.select :grade,
-      [["中学1年", 1], ["中学2年", 2], ["中学3年", 3],
-      ["高校1年", 4], ["高校2年", 5], ["高校3年", 6]] %>
-  </div>
-
-  <div class="field">
-    <%= f.label :postal_code, "郵便番号" %><br>
-    <%= f.text_field :postal_code %>
-  </div>
-
-  <div class="field">
-    <%= f.label :address, "住所" %><br>
-    <%= f.text_field :address %>
-  </div>
-
-  <div class="field">
-    <%= f.label :telephone_number, "電話番号" %><br>
-    <%= f.text_field :telephone_number %>
-  </div>
-
-  <div class="field">
-    <%= f.label :parent_name, "保護者氏名" %><br>
-    <%= f.text_field :parent_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :parent_telephone_number, "保護者電話番号" %><br>
-    <%= f.text_field :parent_telephone_number %>
-  </div>
-
-  <div class="field">
-    <%= f.radio_button :is_active, true, checked: true %>
-    <%= f.label :is_active_true, "在籍中" %>
-
-    <%= f.radio_button :is_active, false %>
-    <%= f.label :is_active_false, "退会済み" %>
-  </div>
-
-  <div class="action">
-    <%= f.submit "新規登録" %>
-  </div>
-
-<% end %>
+</div>

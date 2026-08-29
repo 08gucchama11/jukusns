@@ -1,11 +1,30 @@
-<h1>講師一覧</h1>
-
-<%= link_to "講師登録フォーム", new_admin_teacher_path %>
-
-<% @teachers.each do |teacher| %>
-  <p>
-    <%= teacher.name %>
-    <%= teacher.code %>
-    <%= link_to "詳細", admin_teacher_path(teacher) %>
-  </p>
-<% end %>
+<div class="container">
+  <div class="row justify-content-center mt-3 mb-3">
+    <div class="col-xl-10">
+      <h1>講師一覧</h1>
+      <%= link_to "講師登録フォーム", new_admin_teacher_path, class: "btn btn-primary w-70" %>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-xl-10">
+      <table class="table table-striped table-hover align-middle">
+        <thead>
+          <tr>
+            <th style="width: 25%" >講師コード</th>
+            <th style="width: 60%">氏名</th>
+            <th style="width: 15%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @teachers.each do |teacher| %>
+            <tr>
+              <td><%= teacher.code %></td>
+              <td><%= teacher.name %></td>
+              <td><%= link_to "詳細", admin_teacher_path(teacher), class: "btn btn-primary" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
