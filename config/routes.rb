@@ -27,4 +27,8 @@ Rails.application.routes.draw do
     resources :announcements, only: %i[index create]
   end
 
+  namespace :sns do
+    root "posts#index"
+  end
+
 end
