@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resource :session, path: "", only: %i[create destroy]
     get "dashboard", to: "dashboards#index"
     resources :students, only: %i[index show]
-    resources :instruction_records, only: %i[index new create show edit update]
+    resources :instruction_records, only: %i[index new create edit update]
   end
 
   namespace :admin do

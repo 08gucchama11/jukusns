@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>塾SNS</title>
+    <title>塾SNS 講師</title>
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -18,10 +18,10 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="bg-warning-subtle">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <%= link_to "塾SNS", dashboard_path, class: "navbar-brand" %>
+        <%= link_to "塾SNS 講師", teachers_dashboard_path, class: "navbar-brand" %>
 
         <button
           class="navbar-toggler"
@@ -36,19 +36,16 @@
           <% if authenticated? %>
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
-                <%= link_to "ダッシュボード", dashboard_path, class: "nav-link" %>
+                <%= link_to "ダッシュボード", teachers_dashboard_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
-                <%= link_to "お知らせ", announcements_path, class: "nav-link" %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "指導記録", instruction_records_path, class: "nav-link" %>
+                <%= link_to "生徒一覧", teachers_students_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
                 <%= link_to "SNSタイムライン", sns_root_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
-                <%= button_to "ログアウト", session_path, method: :delete, class: "btn btn-outline-light ms-lg-2" %>
+                <%= button_to "ログアウト", teachers_session_path, method: :delete, class: "btn btn-outline-light ms-lg-2" %>
               </li>
             </ul>
           <% end %>

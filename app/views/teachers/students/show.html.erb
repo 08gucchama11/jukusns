@@ -1,0 +1,66 @@
+
+<% grade_labels = {
+  1 => "中学1年", 2 => "中学2年", 3 => "中学3年",
+  4 => "高校1年", 5 => "高校2年", 6 => "高校3年"
+} %>
+
+<div class="conteiner">
+  <div class="row justify-content-center mt-3">
+    <div class="col-xl-10">
+      <h1>生徒詳細</h1>
+      <%= link_to "この生徒の指導記録を書く", new_teachers_instruction_record_path(student_id: @student.id), class: "btn btn-primary" %>
+      <%= link_to "この生徒の指導記録を見る", teachers_instruction_records_path(student_id: @student.id), class: "btn btn-primary" %>
+      <%= link_to "生徒一覧へ戻る", teachers_students_path, class: "btn btn-success" %>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-xl-10">
+      <div class="card shadow my-3">
+        <div class="card-body">
+          <table class="table table-borderless">
+            <tr>
+              <td style="width: 15%">生徒：</td>
+              <td style="width: 85%"><%= @student.name %></td>
+            </tr>
+            <tr>
+              <td>生徒コード：</td>
+              <td><%= @student.code %></td>
+            </tr>
+            <tr>
+              <td>学校名：</td>
+              <td><%= @student.school %></td>
+            </tr>
+            <tr>
+              <td>学年：</td>
+              <td><%= grade_labels[@student.grade] %></td>
+            </tr>
+            <tr>
+              <td>郵便番号：</td>
+              <td><%= @student.postal_code %></td>
+            </tr>
+            <tr>
+              <td>住所：</td>
+              <td><%= @student.address %></td>
+            </tr>
+            <tr>
+              <td>電話番号：</td>
+              <td><%= @student.telephone_number %></td>
+            </tr>
+            <tr>
+              <td>保護者氏名：</td>
+              <td><%= @student.parent_name %></td>
+            </tr>
+            <tr>
+              <td>保護者電話番号：</td>
+              <td><%= @student.parent_telephone_number %></td>
+            </tr>
+            <tr>
+              <td>在籍ステータス：</td>
+              <td><%= @student.is_active ? "在籍中" : "退会済み" %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

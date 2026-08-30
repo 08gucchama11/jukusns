@@ -1,2 +1,41 @@
-<h1>Teachers::InstructionRecords#index</h1>
-<p>Find me in app/views/teachers/instruction_records/index.html.erb</p>
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-12 col-xl-10 px-3 px-lg-5">
+      <h2><%= @student.name %>さんの指導記録一覧</h2>
+      <%= link_to "生徒詳細へ戻る", teachers_student_path(@student), class: "btn btn-success" %>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <div class="col-12 col-xl-10 px-3 px-lg-5">
+      <% subject_labels = { 1 => "国語", 2 => "数学", 3 => "英語", 4 => "理科", 5 => "社会", 6 => "その他"} %>
+      <table class="table table-striped table-hover align-middle">
+        <thead>
+          <tr>
+            <th>日時</th>
+            <th>担当講師</th>
+            <th>教科</th>
+            <th>単元</th>
+            <th>指導内容</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @instruction_records.each do |instruction_record| %>
+            <tr>
+              <td><%= instruction_record.created_at.strftime("%Y年%m月%d日") %></td>
+              <td><%= instruction_record.teacher.name %></td>
+              <td><%= subject_labels[instruction_record.subject] %></td>
+              <td><%= instruction_record.unit %></td>
+              <td><%= instruction_record.instruction_record %></td>
+              <% if instruction_record.teacher == Current.teacher %>
+                <td>
+                  <%= link_to "編集", edit_teachers_instruction_record_path(instruction_record), class: "btn btn-primary" %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row justify-content-center mt-3">
+    <div class="col-xl-10">
+      <h1>指導記録登録</h1>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <% if @instruction_record.errors.any? %>
+      <div class="col-xl-10">
+        <div class="alert alert-danger">
+          <p><%= @instruction_record.errors.count %>件のエラーが発生しました</p>
+          <ul class="mb-0">
+            <% @instruction_record.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-xl-10">
+      <%= link_to "生徒詳細へ戻る", teachers_student_path(@student), class: "btn btn-success" %>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <div class="col-xl-10">
+      <%= form_with model: [:teachers, @instruction_record],
+              url: teachers_instruction_records_path(student_id: @student.id) do |f| %>
+
+      <div class="field mb-3">
+        <%= f.label :subject, "教科" %>
+        <%= f.select :subject,
+          [["国語", 1], ["数学", 2], ["英語", 3],
+          ["理科", 4], ["社会", 5], ["その他", 6]],
+          {},
+          class: "form-select w-25" %>
+      </div>
+
+      <div class="field mb-3">
+        <%= f.label :unit, "単元" %><br>
+        <%= f.text_field :unit, class: "form-control w-25" %>
+      </div>
+
+      <div class="field mb-3">
+        <%= f.label :instruction_record, "指導記録" %><br>
+        <%= f.text_area :instruction_record, class: "form-control w-50" %>
+      </div>
+
+      <div class="action mt-3">
+        <%= f.submit "登録", class: "btn btn-primary" %>
+      </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

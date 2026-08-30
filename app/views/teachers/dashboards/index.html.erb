@@ -1,2 +1,16 @@
-<h1>講師用ダッシュボード</h1>
-<%= button_to "ログアウト", teachers_session_path, method: :delete %>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+      <h1 class="text-center mb-4">ダッシュボード</h1>
+
+      <div class="card shadow">
+        <div class="card-body p-4">
+          <div class="d-grid gap-3">
+            <%= link_to "生徒一覧", teachers_students_path, class: "btn btn-primary" %>
+            <%= link_to "SNSタイムライン", sns_root_path, class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
