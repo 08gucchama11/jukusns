@@ -8,7 +8,7 @@ class Students::SessionsController < Students::ApplicationController
   def create
     if student = Student.authenticate_by(params.permit(:code, :password))
       start_new_session_for student
-      redirect_to after_authentication_url
+      redirect_to after_authentication_url, notice: "ログインに成功しました。"
     else
       redirect_to root_path, alert: "コードまたはパスワードが違います。"
     end
