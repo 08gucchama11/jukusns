@@ -1,8 +1,12 @@
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-12 col-xl-10 px-3 px-lg-5">
-      <h2><%= @student.name %>さんの指導記録一覧</h2>
-      <%= link_to "生徒詳細へ戻る", teachers_student_path(@student), class: "btn btn-success" %>
+      <% if @student.present? %>
+        <h2><%= @student.name %>さんの指導記録一覧</h2>
+        <%= link_to "生徒詳細へ戻る", teachers_student_path(@student), class: "btn btn-success" %>
+      <% else %>
+        <h2>自分の指導記録一覧</h2>
+      <% end %>
     </div>
   </div>
   <div class="row justify-content-center mt-3">

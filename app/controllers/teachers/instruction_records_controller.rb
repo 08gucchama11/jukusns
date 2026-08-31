@@ -1,9 +1,16 @@
 class Teachers::InstructionRecordsController < Teachers::ApplicationController
   def index
-    @student = Student.find(params[:student_id])
-    @instruction_records = @student.instruction_records
-                                    .includes(:teacher)
-                                    .order(created_at: :desc)
+    if params[:student_id].present?
+      @student = Student.find(params[:student_id])
+
+      @instruction_records = @student.instruction_records
+                                      .includes(:teacher)
+                                      .order(created_at: :desc)
+    else
+      @instruction_records = Current.teacher.instruction_records
+                                     .includes(:student)
+                                     .order(created_at: :desc)
+    end
   end
 
   def new
