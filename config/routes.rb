@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   scope module: :students do
     root "sessions#new"
     resource :session, path: "", only: %i[create destroy]
+    post "guest_login", to: "sessions#guest_login", as: :guest_login
     get "dashboard", to: "dashboards#index"
     resources :announcements, only: %i[index]
     resources :instruction_records, only: %i[index show]

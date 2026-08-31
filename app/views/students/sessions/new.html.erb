@@ -24,8 +24,9 @@
                 class: "form-control" %>
             </div>
 
-            <%= form.submit "ログイン", class: "btn btn-primary w-100" %>
+            <%= form.submit "ログイン", class: "btn btn-primary w-100 mb-3" %>
           <% end %>
+          <%= button_to "ゲストログイン", guest_login_path, class: "btn btn-outline-secondary w-100" %>
         </div>
       </div>
     </div>
