@@ -6,7 +6,8 @@ class Teachers::SessionsController < Teachers::ApplicationController
   end
 
   def create
-    if teacher = Teacher.authenticate_by(params.permit(:code, :password))
+    teacher = Teacher.authenticate_by(params.permit(:code, :password))
+    if teacher&.is_active?
       start_new_session_for teacher
       redirect_to after_authentication_url, notice: "ログインに成功しました。"
     else

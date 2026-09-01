@@ -13,9 +13,9 @@ module Teachers::Authentication
   end
 
   private
-    def authenticated?
+     def authenticated?
       resume_session
-      Current.teacher.present?
+      Current.teacher&.is_active?
     end
 
     def require_authentication

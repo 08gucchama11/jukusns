@@ -6,7 +6,9 @@ class Students::SessionsController < Students::ApplicationController
   end
 
   def create
-    if student = Student.authenticate_by(params.permit(:code, :password))
+    student = Student.authenticate_by(params.permit(:code, :password))
+
+    if student&.is_active?
       start_new_session_for student
       redirect_to after_authentication_url, notice: "ログインに成功しました。"
     else
