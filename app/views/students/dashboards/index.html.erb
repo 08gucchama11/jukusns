@@ -1,3 +1,19 @@
-<h1>ダッシュボード</h1>
-<h1>最新のお知らせ</h1>
-<%= button_to "ログアウト", session_path, method: :delete %>
+<h2 class="mb-3">最新のお知らせ</h2>
+
+<% @announcements.each do |announcement| %>
+  <div class="card mb-3 shadow">
+    <div class="card-header">
+      <h3 class="h5 card-title"><%= announcement.title %></h3>
+      <small class="text-body-secondary">
+        <%= announcement.created_at.strftime("%Y年%m月%d日") %>
+      </small>
+    </div>
+    <div class="card-body">
+      <p class="card-text"><%= announcement.body %></p>
+    </div>
+    <div class="card-footer">
+      <%= link_to "お知らせ一覧を見る", announcements_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+

@@ -1,2 +1,15 @@
-<h1>Students::Announcements#index</h1>
-<p>Find me in app/views/students/announcements/index.html.erb</p>
+<h2 class="mb-3">お知らせ一覧</h2>
+
+<% @announcements.each do |announcement| %>
+  <div class="card mb-3 shadow">
+    <div class="card-header">
+      <h3 class="h5 card-title"><%= announcement.title %></h3>
+      <small class="text-body-secondary">
+        <%= announcement.created_at.strftime("%Y年%m月%d日") %>
+      </small>
+    </div>
+    <div class="card-body">
+      <p class="card-text"><%= announcement.body %></p>
+    </div>
+  </div>
+<% end %>

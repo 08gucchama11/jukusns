@@ -1,2 +1,20 @@
-<h1>Students::InstructionRecords#index</h1>
-<p>Find me in app/views/students/instruction_records/index.html.erb</p>
+<h2 class="mb-3">指導記録一覧</h2>
+
+<% subject_labels = {
+  1 => "国語", 2 => "数学", 3 => "英語",
+  4 => "理科", 5 => "社会", 6 => "その他"
+} %>
+
+<% @instruction_records.each do |instruction_record| %>
+  <div class="card mb-3 shadow">
+    <div class="card-header">
+      <h3 class="h5 card-title mb-0">指導日：<%= instruction_record.created_at.strftime("%Y年%m月%d日") %></h3>
+    </div>
+    <div class="card-body">
+      <p class="card-text">教科<br><%= subject_labels[instruction_record.subject] %></p>
+      <p class="card-text">単元<br><%= instruction_record.unit %></p>
+      <p class="card-text">指導内容<br><%= instruction_record.instruction_record %></p>
+      <p class="card-text">担当講師<br><%= instruction_record.teacher.name %></p>
+    </div>
+  </div>
+<% end %>
