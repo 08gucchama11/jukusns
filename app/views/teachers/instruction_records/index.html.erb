@@ -31,11 +31,11 @@
               <td><%= subject_labels[instruction_record.subject] %></td>
               <td><%= instruction_record.unit %></td>
               <td><%= instruction_record.instruction_record %></td>
-              <% if instruction_record.teacher == Current.teacher %>
-                <td>
+              <td>
+                <% if instruction_record.teacher == Current.teacher %>
                   <%= link_to "編集", edit_teachers_instruction_record_path(instruction_record), class: "btn btn-primary" %>
-                </td>
-              <% end %>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>
