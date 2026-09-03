@@ -7,5 +7,4 @@ class Sns::LikesController < ApplicationController
 
   def destroy
   end
-
 end

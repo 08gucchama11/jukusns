@@ -1,5 +1,4 @@
 class Sns::ProfilesController < ApplicationController
-
   def my_page
   end
 
@@ -11,5 +10,4 @@ class Sns::ProfilesController < ApplicationController
 
   def show
   end
-
 end

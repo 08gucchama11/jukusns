@@ -29,7 +29,7 @@ class Admin::TeachersController < Admin::ApplicationController
 
     attributes = update_teacher_params
     attributes.delete(:password) if attributes[:password].blank?
-    
+
     if @teacher.update(attributes)
       redirect_to admin_teacher_path(@teacher), notice: "講師情報の更新に成功しました。"
     else
@@ -51,5 +51,4 @@ class Admin::TeachersController < Admin::ApplicationController
       :name, :password, :telephone_number, :is_active
     )
   end
-
 end

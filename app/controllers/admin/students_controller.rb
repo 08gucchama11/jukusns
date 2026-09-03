@@ -55,5 +55,4 @@ class Admin::StudentsController < Admin::ApplicationController
       :parent_name, :parent_telephone_number, :is_active
     )
   end
-
 end

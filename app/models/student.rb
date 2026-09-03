@@ -7,6 +7,6 @@ class Student < ApplicationRecord
   validates :code, presence: true, uniqueness: true
   validates :name, :school, :postal_code, :address, :telephone_number, :parent_name, :parent_telephone_number, presence: true
   validates :grade, inclusion: { in: 1..6 }
-  validates :is_active, inclusion: { in: [true, false] }
+  validates :is_active, inclusion: { in: [ true, false ] }
   validates :password, length: { minimum: 6 }, allow_nil: true
 end

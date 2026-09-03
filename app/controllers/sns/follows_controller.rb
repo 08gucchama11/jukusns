@@ -7,5 +7,4 @@ class Sns::FollowsController < ApplicationController
 
   def destroy
   end
-  
 end

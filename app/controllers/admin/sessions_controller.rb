@@ -9,7 +9,7 @@ class Admin::SessionsController < Admin::ApplicationController
     if admin = Admin.authenticate_by(params.permit(:code, :password))
       start_new_session_for admin
       redirect_to after_authentication_url, notice: "ログインに成功しました。"
-        else
+    else
       redirect_to admin_login_path, alert: "コードまたはパスワードが違います。"
     end
   end

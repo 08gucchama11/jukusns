@@ -14,7 +14,7 @@ class CreateStudents < ActiveRecord::Migration[8.0]
       t.string :parent_telephone_number, null: false
       t.boolean :is_active, null: false, default: true
     end
-    
+
     add_index :students, :code, unique: true
   end
 end

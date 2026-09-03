@@ -31,5 +31,4 @@ class Students::SessionsController < Students::ApplicationController
       redirect_to root_path, alert: "ゲストログインは現在利用できません。"
     end
   end
-
 end

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   scope module: :students do
     root "sessions#new"
     resource :session, path: "", only: %i[create destroy]
@@ -31,5 +30,4 @@ Rails.application.routes.draw do
   namespace :sns do
     root "posts#index"
   end
-
 end

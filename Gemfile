@@ -62,9 +62,9 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "cssbundling-rails", "~> 1.4"
+# gem "cssbundling-rails", "~> 1.4"
 
-gem 'dotenv-rails'
+gem "dotenv-rails"
 group :production do
-  gem 'mysql2'
+  gem "mysql2"
 end
