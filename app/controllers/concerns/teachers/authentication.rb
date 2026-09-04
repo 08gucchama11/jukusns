@@ -31,8 +31,12 @@ module Teachers::Authentication
     end
 
     def request_authentication
-      session[:return_to_after_teacher_authenticating] = request.url
-      redirect_to teachers_login_path
+      if current_active_role?
+        redirect_to_current_role_dashboard
+      else
+        session[:return_to_after_teacher_authenticating] = request.url
+        redirect_to teachers_login_path
+      end
     end
 
     def after_authentication_url

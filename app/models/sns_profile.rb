@@ -4,4 +4,6 @@ class SnsProfile < ApplicationRecord
   has_many :posts
   has_many :comments
   has_many :likes
+
+  validates :nickname, presence: true
 end
