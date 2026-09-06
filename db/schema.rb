@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_08_25_234933) do
+ActiveRecord::Schema[8.0].define(version: 2026_09_06_005433) do
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -27,8 +27,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_25_234933) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "sns_profile_id", null: false
+    t.bigint "post_id"
+    t.bigint "sns_profile_id"
     t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -37,8 +37,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_25_234933) do
   end
 
   create_table "follows", force: :cascade do |t|
-    t.integer "follower_sns_profile_id", null: false
-    t.integer "followed_sns_profile_id", null: false
+    t.bigint "follower_sns_profile_id"
+    t.bigint "followed_sns_profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["followed_sns_profile_id"], name: "index_follows_on_followed_sns_profile_id"
@@ -47,8 +47,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_25_234933) do
   end
 
   create_table "instruction_records", force: :cascade do |t|
-    t.integer "teacher_id", null: false
-    t.integer "student_id", null: false
+    t.bigint "teacher_id"
+    t.bigint "student_id"
     t.integer "subject", null: false
     t.string "unit", null: false
     t.text "instruction_record", null: false
@@ -59,8 +59,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_25_234933) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "sns_profile_id", null: false
+    t.bigint "post_id"
+    t.bigint "sns_profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id", "sns_profile_id"], name: "index_likes_on_post_id_and_sns_profile_id", unique: true
@@ -69,7 +69,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_25_234933) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer "sns_profile_id", null: false
+    t.bigint "sns_profile_id"
     t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -77,9 +77,9 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_25_234933) do
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.integer "admin_id"
-    t.integer "teacher_id"
-    t.integer "student_id"
+    t.bigint "admin_id"
+    t.bigint "teacher_id"
+    t.bigint "student_id"
     t.string "ip_address"
     t.string "user_agent"
     t.datetime "created_at", null: false
@@ -90,8 +90,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_25_234933) do
   end
 
   create_table "sns_profiles", force: :cascade do |t|
-    t.integer "student_id"
-    t.integer "teacher_id"
+    t.bigint "student_id"
+    t.bigint "teacher_id"
     t.string "nickname", null: false
     t.string "introduction"
     t.datetime "created_at", null: false
