@@ -35,14 +35,14 @@ production:
     username: <%= ENV["DB_USERNAME"] %>
     password: <%= ENV["DB_PASSWORD"] %>
 
-  cable:
+  cache:
     <<: *primary
-    migrations_paths: db/cable_migrate
+    migrations_paths: db/cache_migrate
 
   queue:
     <<: *primary
     migrations_paths: db/queue_migrate
 
-  cache:
+  cable:
     <<: *primary
-    migrations_paths: db/cache_migrate
+    migrations_paths: db/cable_migrate
