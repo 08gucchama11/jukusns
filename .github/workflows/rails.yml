@@ -7,19 +7,34 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v4
-    - name: Deploy
-      env:
-        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-        USER_NAME: ${{ secrets.USER_NAME }}
-        HOST_NAME: ${{ secrets.HOST_NAME }}
-      run: |
-        echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd jukusns &&
-        git pull origin main &&
-        ~/.rbenv/shims/bundle install &&
-        ~/.rbenv/shims/bundle exec rails assets:precompile RAILS_ENV=production &&
-        ~/.rbenv/shims/bundle exec rails db:migrate RAILS_ENV=production &&
-        if [[ -e tmp/pids/puma.pid ]];then sudo kill $(cat tmp/pids/puma.pid); echo kill puma process;fi &&
-        ~/.rbenv/shims/rails s -e production'
+      - uses: actions/checkout@v4
+
+      - name: Deploy
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          USER_NAME: ${{ secrets.USER_NAME }}
+          HOST_NAME: ${{ secrets.HOST_NAME }}
+
+        run: |
+          echo "$PRIVATE_KEY" > private_key
+          chmod 600 private_key
+
+          ssh -o StrictHostKeyChecking=no -i private_key "${USER_NAME}@${HOST_NAME}" << 'EOF'
+          cd ~/jukusns
+          git pull origin main
+          ~/.rbenv/shims/bundle install
+          RAILS_ENV=production ~/.rbenv/shims/bundle exec rails assets:precompile
+          RAILS_ENV=production ~/.rbenv/shims/bundle exec rails db:migrate
+
+          if [ -f tmp/pids/puma.pid ]; then
+            kill "$(cat tmp/pids/puma.pid)" || true
+            rm -f tmp/pids/puma.pid
+            echo "kill puma process"
+          fi
+
+          nohup ~/.rbenv/shims/bundle exec puma -C config/puma.rb -e production > log/production.log 2>&1 < /dev/null &
+          EOF
+
+          rm -f private_key
