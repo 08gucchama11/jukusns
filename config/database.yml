@@ -37,15 +37,15 @@ production:
 
   cache:
     <<: *primary
-    database: <%= ENV.fetch("DB_DATABASE") + "_cache" %>
+    database: <%= ENV.fetch("DB_DATABASE", "jukusns") + "_cache" %>
     migrations_paths: db/cache_migrate
 
   queue:
     <<: *primary
-    database: <%= ENV.fetch("DB_DATABASE") + "_queue" %>
+    database: <%= ENV.fetch("DB_DATABASE", "jukusns") + "_queue" %>
     migrations_paths: db/queue_migrate
 
   cable:
     <<: *primary
-    database: <%= ENV.fetch("DB_DATABASE") + "_cable" %>
+    database: <%= ENV.fetch("DB_DATABASE", "jukusns") + "_cable" %>
     migrations_paths: db/cable_migrate
