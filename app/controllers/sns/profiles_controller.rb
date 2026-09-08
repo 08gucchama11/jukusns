@@ -1,4 +1,4 @@
-class Sns::ProfilesController < ApplicationController
+class Sns::ProfilesController < Sns::ApplicationController
   def my_page
   end
 

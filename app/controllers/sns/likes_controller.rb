@@ -1,4 +1,4 @@
-class Sns::LikesController < ApplicationController
+class Sns::LikesController < Sns::ApplicationController
   def index
   end
 

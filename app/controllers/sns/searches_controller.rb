@@ -1,4 +1,4 @@
-class Sns::SearchesController < ApplicationController
+class Sns::SearchesController < Sns::ApplicationController
   def search
   end
 end

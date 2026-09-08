@@ -1,4 +1,4 @@
-class Sns::FollowsController < ApplicationController
+class Sns::FollowsController < Sns::ApplicationController
   def index
   end
 

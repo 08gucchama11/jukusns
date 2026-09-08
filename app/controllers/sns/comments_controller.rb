@@ -1,4 +1,4 @@
-class Sns::CommentsController < ApplicationController
+class Sns::CommentsController < Sns::ApplicationController
   def create
   end
 
