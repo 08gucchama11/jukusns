@@ -1,7 +1,12 @@
 <div class="container">
+  <div class="row justify-content-center mt-3 mb-3">
+    <div class="col-xl-10">
+      <h1>タイムライン</h1>
+    </div>
+  </div>
   <div class="row justify-content-center my-3">
     <div class="col-12 col-md-6">
-      <h2>SNS投稿フォーム</h2>
+      <h3>投稿フォーム</h3>
         <% if @post.errors.any? %>
           <div class="alert alert-danger">
             <p><%= @post.errors.count %>件のエラーが発生しました</p>
@@ -15,7 +20,7 @@
       <%= form_with model: [:sns, @post] do |f| %>
         <div class="field">
           <%= f.label :body, "投稿" %><br>
-          <%= f.text_area :body, class: "form-control mb-3" %>
+          <%= f.text_area :body, class: "form-control mb-3", maxlength: 140 %>
         </div>
         <div class="action">
           <%= f.submit "投稿する", class: "btn btn-primary btn-sm" %>
@@ -25,25 +30,25 @@
   </div>
   <div class="row justify-content-center my-5">
     <div class="col-12 col-xl-10 px-3 px-lg-5">
-      <h2>投稿一覧</h2>
-      <table class="table table-striped table-hover align-middle">
-        <thead>
-          <tr>
-            <th style="width: 15%" >投稿日時</th>
-            <th style="width: 25%">ニックネーム</th>
-            <th style="width: 60%">本文</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @posts.each do |post| %>
-            <tr>
-              <td><%= post.created_at.strftime("%Y年%m月%d日") %></td>
-              <td><%= post.sns_profile.nickname %></td>
-              <td><%= post.body %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <h3>投稿一覧</h3>
+        <% @posts.each do |post| %>
+          <div class="card my-4 shadow">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span><%= post.sns_profile.nickname %></span>
+              <small class="text-body-secondary">
+                <%= post.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+              </small>
+            </div>
+            <div class="card-body">
+              <p class="card-text mb-0"><%= post.body %></p>
+            </div>
+            <div class="card-footer">
+              <% if post.sns_profile == current_sns_profile %>
+                <%= button_to "削除", sns_post_path(post), method: :delete, class: "btn btn-danger btn-sm", form: { data: { turbo: true, turbo_confirm: "この投稿を削除しますか？" } } %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
     </div>
   </div>
 </div>

@@ -19,6 +19,13 @@ class Sns::PostsController < Sns::ApplicationController
   end
 
   def destroy
+    @post = current_sns_profile.posts.find_by(id: params[:id])
+
+    if @post&.destroy
+      redirect_to sns_root_path, notice: "投稿を削除しました。"
+    else
+      redirect_to sns_root_path, alert: "投稿を削除できません。"
+    end
   end
 
   private
@@ -26,5 +33,5 @@ class Sns::PostsController < Sns::ApplicationController
   def post_params
     params.require(:post).permit(:body)
   end
-  
+
 end
