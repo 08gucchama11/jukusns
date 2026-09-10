@@ -9,7 +9,7 @@
       </small>
     </div>
     <div class="card-body">
-      <p class="card-text"><%= announcement.body %></p>
+      <p class="card-text"><%= simple_format(announcement.body, { class: "mb-0" }) %></p>
     </div>
     <div class="card-footer">
       <%= link_to "お知らせ一覧を見る", announcements_path, class: "btn btn-primary" %>

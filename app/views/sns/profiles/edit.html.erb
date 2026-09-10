@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row justify-content-center mt-3">
+    <div class="col-xl-10">
+      <h1>プロフィール編集</h1>
+      <%= link_to "マイページへ戻る",
+            sns_my_page_path,
+            class: "btn btn-success btn-sm" %>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mt-3">
+    <% if @sns_profile.errors.any? %>
+      <div class="col-xl-10">
+        <div class="alert alert-danger">
+          <p><%= @sns_profile.errors.count %>件のエラーが発生しました</p>
+          <ul class="mb-0">
+            <% @sns_profile.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row justify-content-center mt-3">
+    <div class="col-12 col-xl-10">
+      <%= form_with model: @sns_profile, url: sns_profile_path(@sns_profile), method: :patch do |f| %>
+      <div class="row gx-0">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 mb-3">
+          <%= f.label :nickname, "ニックネーム" %>
+          <%= f.text_field :nickname, class: "form-control" %>
+        </div>
+      </div>
+    <div class="row gx-0">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-6 mb-3">
+        <%= f.label :introduction, "自己紹介" %>
+        <%= f.text_area :introduction, class: "form-control", rows: 5 %>
+      </div>
+    </div>
+      <%= f.submit "更新する", class: "btn btn-primary btn-sm" %>
+    <% end %>
+  </div>
+</div>

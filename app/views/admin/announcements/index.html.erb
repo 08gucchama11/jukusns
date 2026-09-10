@@ -43,7 +43,7 @@
             <tr>
               <td><%= announcement.created_at.strftime("%Y年%m月%d日") %></td>
               <td><%= announcement.title %></td>
-              <td><%= announcement.body %></td>
+              <td><%= simple_format(announcement.body, { class: "mb-0" }) %></td>
             </tr>
           <% end %>
         </tbody>

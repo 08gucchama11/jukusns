@@ -21,10 +21,12 @@ class Sns::PostsController < Sns::ApplicationController
   def destroy
     @post = current_sns_profile.posts.find_by(id: params[:id])
 
+    redirect_path = params[:from] == "my_page" ? sns_my_page_path : sns_root_path
+
     if @post&.destroy
-      redirect_to sns_root_path, notice: "投稿を削除しました。"
+      redirect_to redirect_path, notice: "投稿を削除しました。"
     else
-      redirect_to sns_root_path, alert: "投稿を削除できません。"
+      redirect_to redirect_path, alert: "投稿を削除できません。"
     end
   end
 
