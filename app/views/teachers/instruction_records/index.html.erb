@@ -3,7 +3,7 @@
     <div class="col-12 col-xl-10 px-3 px-lg-5">
       <% if @student.present? %>
         <h2><%= @student.name %>さんの指導記録一覧</h2>
-        <%= link_to "生徒詳細へ戻る", teachers_student_path(@student), class: "btn btn-success" %>
+        <%= link_to "生徒詳細へ戻る", teachers_student_path(@student), class: "btn btn-success btn-sm" %>
       <% else %>
         <h2>自分の指導記録一覧</h2>
       <% end %>
@@ -30,10 +30,10 @@
               <td><%= instruction_record.teacher.name %></td>
               <td><%= subject_labels[instruction_record.subject] %></td>
               <td><%= instruction_record.unit %></td>
-              <td><%= instruction_record.instruction_record %></td>
+              <td><%= simple_format(instruction_record.instruction_record, { class: "mb-0" }) %></td>
               <td>
                 <% if instruction_record.teacher == Current.teacher %>
-                  <%= link_to "編集", edit_teachers_instruction_record_path(instruction_record), class: "btn btn-primary" %>
+                  <%= link_to "編集", edit_teachers_instruction_record_path(instruction_record), class: "btn btn-primary btn-sm" %>
                 <% end %>
               </td>
             </tr>

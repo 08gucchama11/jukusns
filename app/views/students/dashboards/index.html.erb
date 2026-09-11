@@ -8,11 +8,11 @@
         <%= announcement.created_at.strftime("%Y年%m月%d日") %>
       </small>
     </div>
-    <div class="card-body">
+    <div class="card-body py-0">
       <p class="card-text"><%= simple_format(announcement.body, { class: "mb-0" }) %></p>
     </div>
     <div class="card-footer bg-white">
-      <%= link_to "お知らせ一覧を見る", announcements_path, class: "btn btn-primary" %>
+      <%= link_to "お知らせ一覧を見る", announcements_path, class: "btn btn-primary btn-sm" %>
     </div>
   </div>
 <% end %>

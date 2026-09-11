@@ -13,7 +13,10 @@
     <div class="card-body">
       <p class="card-text">教科<br><%= subject_labels[instruction_record.subject] %></p>
       <p class="card-text">単元<br><%= instruction_record.unit %></p>
-      <p class="card-text">指導内容<br><%= instruction_record.instruction_record %></p>
+      <div class="card-text mb-3">
+        <div>指導内容</div>
+        <%= simple_format(instruction_record.instruction_record, { class: "mb-0" }) %>
+      </div>
       <p class="card-text">担当講師<br><%= instruction_record.teacher.name %></p>
     </div>
   </div>
