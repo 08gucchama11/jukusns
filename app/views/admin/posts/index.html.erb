@@ -11,9 +11,9 @@
           <tr>
             <th style="width: 20%">日時</th>
             <th style="width: 15%">ニックネーム</th>
-            <th style="width: 50%">投稿内容</th>
-            <th></th>
-            <th></th>
+            <th style="width: 45%">投稿内容</th>
+            <th style="width: 10%"></th>
+            <th style="width: 10%"></th>
           </tr>
         </thead>
         <tbody>
@@ -21,8 +21,8 @@
             <tr>
               <td><%= post.created_at.strftime("%Y年%m月%d日 %H:%M") %></td>
               <td><%= post.sns_profile.nickname %></td>
-              <td><%= post.body %></td>
-              <td></td>
+              <td><%= simple_format(post.body, { class: "mb-0" }) %></td>
+              <td><%= link_to "詳細（#{post.comments.size}）", admin_post_path(post), class: "btn btn-primary btn-sm" %></td>
               <td><%= button_to "削除", admin_post_path(post), method: :delete, class: "btn btn-danger btn-sm", form: { data: { turbo: true, turbo_confirm: "この投稿を削除しますか？" } } %></td>
             </tr>
           <% end %>

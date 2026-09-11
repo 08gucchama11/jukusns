@@ -9,10 +9,10 @@
     <div class="col-xl-10">
       <h1>指導記録一覧</h1>
       <% if @teacher.present? %>
-        <%= link_to "講師詳細へ戻る", admin_teacher_path(@teacher), class: "btn btn-success" %>
+        <%= link_to "講師詳細へ戻る", admin_teacher_path(@teacher), class: "btn btn-success btn-sm" %>
       <% end %>
       <% if @student.present? %>
-        <%= link_to "生徒詳細へ戻る", admin_student_path(@student), class: "btn btn-success" %>
+        <%= link_to "生徒詳細へ戻る", admin_student_path(@student), class: "btn btn-success btn-sm" %>
       <% end %>
     </div>
   </div>

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     get "dashboard", to: "dashboards#index"
     resources :instruction_records, only: %i[index]
     resources :posts, only: %i[index show destroy]
+    resources :comments, only: %i[destroy]
     resources :students, only: %i[index new create show edit update]
     resources :teachers, only: %i[index new create show edit update]
     resources :announcements, only: %i[index create]

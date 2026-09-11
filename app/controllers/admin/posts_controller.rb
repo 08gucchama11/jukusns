@@ -1,10 +1,10 @@
 class Admin::PostsController < Admin::ApplicationController
   def index
-    @posts = Post.includes(:sns_profile).order(created_at: :desc)
+    @posts = Post.includes(:sns_profile, :comments).order(created_at: :desc)
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.includes(:sns_profile, comments: :sns_profile).find(params[:id])
   end
 
   def destroy

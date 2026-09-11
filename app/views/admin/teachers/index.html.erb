@@ -2,7 +2,7 @@
   <div class="row justify-content-center mt-3 mb-3">
     <div class="col-xl-10">
       <h1>講師一覧</h1>
-      <%= link_to "講師登録フォーム", new_admin_teacher_path, class: "btn btn-primary w-70" %>
+      <%= link_to "講師登録フォーム", new_admin_teacher_path, class: "btn btn-primary btn-sm" %>
     </div>
   </div>
   <div class="row justify-content-center">
@@ -20,7 +20,7 @@
             <tr>
               <td><%= teacher.code %></td>
               <td><%= teacher.name %></td>
-              <td><%= link_to "詳細", admin_teacher_path(teacher), class: "btn btn-primary" %></td>
+              <td><%= link_to "詳細", admin_teacher_path(teacher), class: "btn btn-primary btn-sm" %></td>
             </tr>
           <% end %>
         </tbody>
