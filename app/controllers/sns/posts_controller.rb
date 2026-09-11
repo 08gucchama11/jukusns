@@ -1,7 +1,7 @@
 class Sns::PostsController < Sns::ApplicationController
   def index
     @post = current_sns_profile.posts.new
-    @posts = Post.includes(:sns_profile).order(created_at: :desc)
+    @posts = Post.includes(:sns_profile, :comments).order(created_at: :desc)
   end
 
   def create
@@ -10,12 +10,15 @@ class Sns::PostsController < Sns::ApplicationController
     if @post.save
       redirect_to sns_root_path, notice: "投稿に成功しました。"
     else
-      @posts = Post.includes(:sns_profile).order(created_at: :desc)
+      @posts = Post.includes(:sns_profile, :comments).order(created_at: :desc)
       render :index, status: :unprocessable_entity
     end
   end
 
   def show
+    @post = Post.includes(:sns_profile).find(params[:id])
+    @comments = @post.comments.includes(:sns_profile).order(created_at: :asc)
+    @comment = current_sns_profile.comments.new
   end
 
   def destroy

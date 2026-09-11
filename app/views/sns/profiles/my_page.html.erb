@@ -26,7 +26,8 @@
             <div class="card-body">
               <p class="card-text mb-0"><%= post.body %></p>
             </div>
-            <div class="card-footer">
+            <div class="card-footer bg-white border-top-0 d-flex align-items-center gap-2">
+              <%= link_to "#{post.comments.size}コメント", sns_post_path(post), class: "btn btn-primary btn-sm" %>
               <%= button_to "削除", sns_post_path(post, from: "my_page"), method: :delete, class: "btn btn-danger btn-sm", form: { data: { turbo: true, turbo_confirm: "この投稿を削除しますか？" } } %>
             </div>
           </div>

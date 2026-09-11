@@ -5,8 +5,8 @@
       <%= link_to "マイページ", sns_my_page_path, class: "btn btn-primary btn-sm" %>
     </div>
   </div>
-  <div class="row justify-content-center my-3">
-    <div class="col-12 col-md-6">
+  <div class="row justify-content-center my-5">
+    <div class="col-12 col-xl-10 px-3 px-lg-5">
       <h3>投稿フォーム</h3>
         <% if @post.errors.any? %>
           <div class="alert alert-danger">
@@ -41,9 +41,10 @@
             </small>
           </div>
           <div class="card-body">
-            <p class="card-text mb-0"><%= post.body %></p>
+            <%= simple_format(post.body, { class: "card-text mb-0" }) %>
           </div>
-          <div class="card-footer">
+          <div class="card-footer bg-white border-top-0 d-flex align-items-center gap-2">
+            <%= link_to "#{post.comments.size}コメント", sns_post_path(post), class: "btn btn-primary btn-sm" %>
             <% if post.sns_profile == current_sns_profile %>
               <%= button_to "削除", sns_post_path(post), method: :delete, class: "btn btn-danger btn-sm", form: { data: { turbo: true, turbo_confirm: "この投稿を削除しますか？" } } %>
             <% end %>

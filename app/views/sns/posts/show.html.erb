@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row justify-content-center my-5">
+    <div class="col-12 col-xl-10 px-3 px-lg-5">
+      <div class="card my-4 shadow">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span><%= @post.sns_profile.nickname %></span>
+            <small class="text-body-secondary">
+              <%= @post.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+            </small>
+        </div>
+        <div class="card-body">
+          <%= simple_format(@post.body, { class: "card-text mb-0" }) %>
+        </div>
+        <% if @post.sns_profile == current_sns_profile %>
+          <div class="card-footer bg-white border-top-0">
+            <%= button_to "削除", sns_post_path(@post), method: :delete, class: "btn btn-danger btn-sm", form: { data: { turbo: true, turbo_confirm: "この投稿を削除しますか？" } } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center my-5">
+    <div class="col-12 col-xl-10 px-3 px-lg-5">
+      <% if @comment.errors.any? %>
+        <div class="alert alert-danger">
+          <p><%= @comment.errors.count %>件のエラーが発生しました</p>
+            <ul class="mb-0">
+              <% @comment.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+        </div>
+      <% end %>
+      <%= form_with model: @comment, url: sns_post_comments_path(@post) do |f| %>
+        <div class="field">
+          <%= f.label :body, "コメント" %><br>
+          <%= f.text_area :body, class: "form-control mb-3", maxlength: 140 %>
+        </div>
+        <div class="action">
+          <%= f.submit "投稿する", class: "btn btn-primary btn-sm" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row justify-content-center my-5">
+    <div class="col-12 col-xl-10 px-3 px-lg-5">
+      <h4><%= @comments.size %>件のコメント</h4>
+      <% @comments.each do |comment| %>
+        <div class="card my-4 shadow">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span><%= comment.sns_profile.nickname %></span>
+            <small class="text-body-secondary">
+              <%= comment.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+            </small>
+          </div>
+          <div class="card-body">
+            <%= simple_format(comment.body, { class: "card-text mb-0" }) %>
+          </div>
+          <% if comment.sns_profile == current_sns_profile %>
+            <div class="card-footer bg-white border-top-0">
+              <%= button_to "削除", sns_post_comment_path(@post, comment), method: :delete, class: "btn btn-danger btn-sm",form: { data: { turbo: true, turbo_confirm: "このコメントを削除しますか？" } } %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

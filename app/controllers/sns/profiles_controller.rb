@@ -1,7 +1,7 @@
 class Sns::ProfilesController < Sns::ApplicationController
   def my_page
     @sns_profile = current_sns_profile
-    @posts = @sns_profile.posts.order(created_at: :desc)
+    @posts = @sns_profile.posts.includes(:comments).order(created_at: :desc)
   end
 
   def edit
