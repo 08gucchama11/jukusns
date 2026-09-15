@@ -8,6 +8,11 @@ class Sns::ProfilesController < Sns::ApplicationController
     @sns_profile = current_sns_profile
   end
 
+  def show
+    @sns_profile = SnsProfile.find(params[:id])
+    @posts = @sns_profile.posts.includes(:comments).order(created_at: :desc)
+  end
+
   def update
     @sns_profile = current_sns_profile
 

@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row justify-content-center mt-3 mb-3">
+    <div class="col-12 col-xl-10">
+      <h1><%= @sns_profile.nickname %>さんのプロフィール</h1>
+
+      <div class="card my-3">
+        <div class="card-body">
+          <h5>自己紹介</h5>
+          <% if @sns_profile.introduction.present? %>
+            <%= simple_format(@sns_profile.introduction, { class: "mb-0" }) %>
+          <% else %>
+            <p class="text-body-secondary mb-0">まだ自己紹介はありません。</p>
+          <% end %>
+        </div>
+      </div>
+
+      <%= link_to "タイムライン", sns_root_path, class: "btn btn-success btn-sm" %>
+    </div>
+  </div>
+
+  <div class="row justify-content-center my-5">
+    <div class="col-12 col-xl-10 px-3 px-lg-5">
+      <h3>投稿一覧</h3>
+
+      <% if @posts.any? %>
+        <% @posts.each do |post| %>
+          <div class="card my-4 shadow">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span><%= post.sns_profile.nickname %></span>
+
+              <small class="text-body-secondary">
+                <%= post.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+              </small>
+            </div>
+
+            <div class="card-body">
+              <%= simple_format(post.body, { class: "card-text mb-0" }) %>
+            </div>
+
+            <div class="card-footer bg-white border-top-0">
+              <%= link_to "#{post.comments.size}コメント", sns_post_path(post), class: "btn btn-primary btn-sm" %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p class="text-body-secondary my-4">まだ投稿はありません。</p>
+      <% end %>
+    </div>
+  </div>
+</div>
