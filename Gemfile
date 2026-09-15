@@ -68,3 +68,6 @@ gem "dotenv-rails"
 group :production do
   gem "mysql2"
 end
+
+# Rails標準のバリデーションメッセージを日本語で使えるようにする
+gem "rails-i18n"

@@ -1,0 +1,59 @@
+ja:
+  activerecord:
+    # エラー文に出るモデル名
+    models:
+      admin: "管理者"
+      student: "生徒"
+      teacher: "講師"
+      sns_profile: "SNSプロフィール"
+      post: "投稿"
+      comment: "コメント"
+      announcement: "お知らせ"
+      instruction_record: "指導記録"
+
+    # エラー文に出る属性名
+    attributes:
+      admin:
+        code: "管理者コード"
+        password: "パスワード"
+
+      student:
+        code: "生徒コード"
+        name: "氏名"
+        school: "学校名"
+        postal_code: "郵便番号"
+        address: "住所"
+        telephone_number: "電話番号"
+        parent_name: "保護者氏名"
+        parent_telephone_number: "保護者電話番号"
+        grade: "学年"
+        is_active: "在籍状況"
+        password: "パスワード"
+
+      teacher:
+        code: "講師コード"
+        name: "氏名"
+        telephone_number: "電話番号"
+        is_active: "在籍状況"
+        password: "パスワード"
+
+      sns_profile:
+        nickname: "ニックネーム"
+        introduction: "自己紹介"
+
+      post:
+        body: "投稿内容"
+
+      comment:
+        body: "コメント内容"
+
+      announcement:
+        title: "タイトル"
+        body: "お知らせ本文"
+
+      instruction_record:
+        student: "生徒"
+        teacher: "担当講師"
+        subject: "教科"
+        unit: "単元"
+        instruction_record: "指導内容"
