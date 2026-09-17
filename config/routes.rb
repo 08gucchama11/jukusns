@@ -35,11 +35,11 @@ Rails.application.routes.draw do
       resource :like, only: %i[create destroy]
       resources :comments, only: %i[create destroy]
     end
-    
+
     resources :profiles, only: %i[show edit update] do
       resource :follow, only: %i[create destroy]
     end
-    
+
     get "my_page", to: "profiles#my_page", as: :my_page
     get "search", to: "searches#search", as: :search
   end

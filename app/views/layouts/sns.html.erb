@@ -63,7 +63,23 @@
         </div>
       </div>
     </nav>
-
+    <%# SNSのどの画面からでも使える検索フォーム %>
+    <div class="border-bottom">
+      <div class="container py-3">
+        <%= form_with url: sns_search_path, method: :get, class: "row g-2", data: { turbo: false } do |f| %>
+          <div class="col-12 col-sm-3">
+          <%# 検索する対象を選ぶ。「投稿本文」か「ニックネーム」か %>
+            <%= f.select :target, [["投稿本文", "posts"], ["ニックネーム", "profiles"]], { selected: params[:target] }, class: "form-select" %>
+          </div>
+          <div class="col-12 col-sm">
+            <%# 入力した文字は q という名前で検索画面へ送られる %>
+            <%= f.text_field :q, value: params[:q], class: "form-control", placeholder: "検索したい文字を入力" %> </div>
+          <div class="col-12 col-sm-auto">
+            <%= f.submit "検索", class: "btn btn-primary w-100" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   <main class="py-4">
     <div class="container">
       <% if flash[:alert] %>

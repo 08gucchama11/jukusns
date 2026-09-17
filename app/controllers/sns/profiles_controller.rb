@@ -28,5 +28,4 @@ class Sns::ProfilesController < Sns::ApplicationController
   def sns_profile_params
     params.require(:sns_profile).permit(:nickname, :introduction)
   end
-
 end

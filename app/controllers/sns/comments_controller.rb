@@ -14,7 +14,7 @@ class Sns::CommentsController < Sns::ApplicationController
 
   def destroy
     @post = Post.find(params[:post_id])
-    @comment = current_sns_profile.comments.find_by( id: params[:id], post_id: @post.id )
+    @comment = current_sns_profile.comments.find_by(id: params[:id], post_id: @post.id)
 
     if @comment&.destroy
       redirect_to sns_post_path(@post), notice: "コメントを削除しました。"

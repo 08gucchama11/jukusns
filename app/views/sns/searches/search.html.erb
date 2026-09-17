@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="row justify-content-center mt-3">
+    <div class="col-12 col-xl-10">
+      <h1>検索結果</h1>
+
+      <%# ニックネーム検索が選ばれた時だけ、ユーザー検索結果を表示する %>
+      <% if @target == "profiles" %>
+        <h2 class="h4 mt-4">ユーザーの検索結果</h2>
+
+        <%# キーワード未入力なら、検索せず案内だけを表示する %>
+        <% if @q.blank? %>
+          <p class="text-body-secondary">
+            ニックネームを入力して検索してください。
+          </p>
+
+        <%# 検索結果が1件以上ある時 %>
+        <% elsif @sns_profiles.any? %>
+          <p class="text-body-secondary">
+            「<%= @q %>」の検索結果
+          </p>
+
+          <% @sns_profiles.each do |sns_profile| %>
+            <%# 自分自身ならマイページ、他人ならプロフィール画面へ移動する %>
+            <% if sns_profile == current_sns_profile %>
+              <% profile_path = sns_my_page_path %>
+            <% else %>
+              <% profile_path = sns_profile_path(sns_profile) %>
+            <% end %>
+
+            <div class="card my-3 shadow-sm">
+              <div class="card-body">
+                <h3 class="h5 card-title">
+                  <%= sns_profile.nickname %>
+                </h3>
+
+                <h4 class="h6 mt-3">自己紹介</h4>
+
+                <% if sns_profile.introduction.present? %>
+                  <%= simple_format(sns_profile.introduction, { class: "card-text mb-3" }) %>
+                <% else %>
+                  <p class="text-body-secondary">
+                    まだ自己紹介はありません。
+                  </p>
+                <% end %>
+
+                <%= link_to "プロフィールを見る",
+                            profile_path,
+                            class: "btn btn-primary btn-sm" %>
+              </div>
+            </div>
+          <% end %>
+
+        <%# キーワードはあるが、該当するユーザーがいない時 %>
+        <% else %>
+          <p class="text-body-secondary">
+            該当するユーザーはいません。
+          </p>
+        <% end %>
+
+      <%# 投稿検索は、まだ作っていないことを明示する %>
+      <% elsif @target == "posts" %>
+        <h2 class="h4 mt-4">投稿の検索結果</h2>
+
+        <%# キーワード未入力なら、検索せず案内だけを表示する %>
+        <% if @q.blank? %>
+          <p class="text-body-secondary">投稿本文を入力して検索してください。</p>
+
+        <%# 検索結果が1件以上ある時 %>
+        <% elsif @posts.any? %>
+          <p class="text-body-secondary">「<%= @q %>」の検索結果</p>
+          <% @posts.each do |post| %>
+            <div class="card my-3 shadow-sm">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <span>
+                  <%# 自分の投稿者名ならマイページ、他人ならプロフィールへ移動する %>
+                  <% if post.sns_profile == current_sns_profile %>
+                    <%= link_to post.sns_profile.nickname, sns_my_page_path, class: "text-decoration-none" %>
+                  <% else %>
+                    <%= link_to post.sns_profile.nickname,sns_profile_path(post.sns_profile), class: "text-decoration-none" %>
+                  <% end %>
+              </span>
+              <small class="text-body-secondary"><%= post.created_at.strftime("%Y年%m月%d日 %H:%M") %></small>
+              </div>
+
+              <div class="card-body">
+                <%= simple_format(post.body, { class: "card-text mb-0" }) %>
+              </div>
+
+              <div class="card-footer bg-white border-top-0">
+                <%= link_to "#{post.comments.size}コメント", sns_post_path(post), class: "btn btn-primary btn-sm" %>
+              </div>
+            </div>
+          <% end %>
+
+        <%# キーワードはあるが、該当する投稿がない時 %>
+        <% else %>
+          <p class="text-body-secondary">該当する投稿はありません。</p>
+        <% end %>
+
+      <% else %>
+        <%# 想定外の検索対象が送られた時の表示 %>
+        <p class="text-body-secondary">検索対象を選んでください。</p>
+      <% end %>
+    </div>
+  </div>
+</div>
