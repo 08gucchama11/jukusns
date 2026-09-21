@@ -13,6 +13,15 @@
         <div class="card-body">
           <%= simple_format(@post.body, { class: "card-text mb-0" }) %>
         </div>
+        <div class="card-footer bg-white border-top-0 d-flex align-items-center gap-2">
+          <% liked = @post.likes.any? { |like| like.sns_profile_id == current_sns_profile.id } %>
+
+          <% if liked %>
+            <%= button_to "♥ #{@post.likes.size}", sns_post_like_path(@post), method: :delete, class: "btn btn-primary btn-sm" %>
+          <% else %>
+            <%= button_to "♡ #{@post.likes.size}", sns_post_like_path(@post), method: :post, class: "btn btn-outline-primary btn-sm" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   namespace :sns do
     root "posts#index"
 
+    resources :likes, only: :index
+
     resources :posts, only: %i[index create show destroy] do
       resource :like, only: %i[create destroy]
       resources :comments, only: %i[create destroy]

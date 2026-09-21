@@ -25,7 +25,7 @@ class Teachers::InstructionRecordsController < Teachers::ApplicationController
     @instruction_record.student = @student
 
     if @instruction_record.save
-      redirect_to teachers_student_path(@student), notice: "指導記録を登録しました。"
+      redirect_to teachers_instruction_records_path(student_id: @student.id), notice: "指導記録を登録しました。"
     else
       render :new, status: :unprocessable_entity
     end

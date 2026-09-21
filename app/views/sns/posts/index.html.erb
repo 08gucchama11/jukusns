@@ -44,7 +44,19 @@
             <%= simple_format(post.body, { class: "card-text mb-0" }) %>
           </div>
           <div class="card-footer bg-white border-top-0 d-flex align-items-center gap-2">
+            <%# この投稿に、ログイン中の人が既にいいねしているか確認する %>
+            <% liked = post.likes.any? { |like| like.sns_profile_id == current_sns_profile.id } %>
+
+            <% if liked %>
+              <%# いいね済みなら、DELETEでいいねを解除する %>
+              <%= button_to "♥ #{post.likes.size}", sns_post_like_path(post), method: :delete, class: "btn btn-primary btn-sm" %>
+            <% else %>
+              <%# 未いいねなら、POSTで新しくいいねを作る %>
+              <%= button_to "♡ #{post.likes.size}", sns_post_like_path(post), method: :post, class: "btn btn-outline-primary btn-sm" %>
+            <% end %>
+
             <%= link_to "#{post.comments.size}コメント", sns_post_path(post), class: "btn btn-primary btn-sm" %>
+
             <% if post.sns_profile == current_sns_profile %>
               <%= button_to "削除", sns_post_path(post), method: :delete, class: "btn btn-danger btn-sm", form: { data: { turbo: true, turbo_confirm: "この投稿を削除しますか？" } } %>
             <% end %>
