@@ -2,17 +2,19 @@
   <div class="row justify-content-center mt-3 mb-3">
     <div class="col-xl-10">
       <h1><%= @sns_profile.nickname %>さんのマイページ</h1>
-        <div class="card my-3" >
-          <div class="card-body">
-            <h5>自己紹介</h5>
-            <% if @sns_profile.introduction.present? %>
-              <%= simple_format(@sns_profile.introduction, { class: "mb-0" }) %>
-            <% else %>
-              <p class="text-body-secondary mb-0">まだ自己紹介はありません。</p>
-            <% end %>
-          </div>
+      <div class="card my-3" >
+        <div class="card-body">
+          <h5>自己紹介</h5>
+          <% if @sns_profile.introduction.present? %>
+            <%= simple_format(@sns_profile.introduction, { class: "mb-0" }) %>
+          <% else %>
+            <p class="text-body-secondary mb-0">まだ自己紹介はありません。</p>
+          <% end %>
         </div>
-      <%= link_to "プロフィール編集", edit_sns_profile_path(@sns_profile), class: "btn btn-primary btn-sm" %>
+        <div class="card-footer bg-white border-top-0">
+          <%= link_to "プロフィール編集", edit_sns_profile_path(@sns_profile), class: "btn btn-primary btn-sm" %>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row justify-content-center my-5">
