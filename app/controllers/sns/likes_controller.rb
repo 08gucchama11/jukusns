@@ -1,6 +1,7 @@
 class Sns::LikesController < Sns::ApplicationController
-  # いいね一覧機能で使う。今は空のまま残しておく
+
   def index
+    @posts = current_sns_profile.liked_posts.includes(:sns_profile, :comments, :likes).order(created_at: :desc)
   end
 
   def create

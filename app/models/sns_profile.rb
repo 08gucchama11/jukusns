@@ -6,6 +6,11 @@ class SnsProfile < ApplicationRecord
   has_many :comments
   has_many :likes
 
+  # 自分がいいねした投稿を、likes テーブルを経由して取得する
+  has_many :liked_posts,
+           through: :likes,
+           source: :post
+
   has_many :following_relationships,
            class_name: "Follow",
            foreign_key: :follower_sns_profile_id
