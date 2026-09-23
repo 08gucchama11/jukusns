@@ -54,6 +54,9 @@
                 <%= link_to "いいね一覧", sns_likes_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
+                <%= link_to "フォロー一覧", sns_follows_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
                 <%# ログイン中のロールに合ったセッションを削除してログアウトする %>
                 <% if Current.student.present? %>
                   <%= button_to "ログアウト", session_path, method: :delete, class: "btn btn-outline-light btn-sm ms-lg-2 mt-2 mt-lg-0" %>

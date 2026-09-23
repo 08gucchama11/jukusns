@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     root "posts#index"
 
     resources :likes, only: :index
+    resources :follows, only: :index
 
     resources :posts, only: %i[index create show destroy] do
       resource :like, only: %i[create destroy]

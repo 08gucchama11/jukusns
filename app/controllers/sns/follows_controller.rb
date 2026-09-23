@@ -1,5 +1,7 @@
 class Sns::FollowsController < Sns::ApplicationController
   def index
+    @following_profiles = current_sns_profile.following_profiles
+    @follower_profiles = current_sns_profile.follower_profiles
   end
 
   def create

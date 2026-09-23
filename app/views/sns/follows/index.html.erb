@@ -1,2 +1,60 @@
-<h1>Sns::Follows#index</h1>
-<p>Find me in app/views/sns/follows/index.html.erb</p>
+<div class="container">
+  <div class="row justify-content-center mt-3 mb-3">
+    <div class="col-xl-10">
+      <h1>フォロー一覧</h1>
+    </div>
+  </div>
+  <div class="row justify-content-center my-5">
+    <div class="col-12 col-xl-10 px-3 px-lg-5">
+      <h3>フォロー中</h3>
+        <% if @following_profiles.any? %>
+          <% @following_profiles.each do |following_profile| %>
+            <div class="card my-4 shadow">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <span><%= following_profile.nickname %></span>
+              </div>
+              <div class="card-body">
+                <% if following_profile.introduction.present? %>
+                  <%= simple_format(following_profile.introduction, { class: "card-text mb-0" }) %>
+                <% else %>
+                  <p class="text-body-secondary mb-0">まだ自己紹介はありません。</p>
+                <% end %>
+              </div>
+              <div class="card-footer bg-white border-top-0 d-flex align-items-center gap-2">
+                <%= link_to "プロフィールを見る", sns_profile_path(following_profile), class: "btn btn-sm btn-primary" %>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-body-secondary my-4">まだ誰もフォローしていません。</p>
+        <% end %>
+    </div>
+  </div>
+  <div class="row justify-content-center my-5">
+    <div class="col-12 col-xl-10 px-3 px-lg-5">
+      <h3>フォロワー一覧</h3>
+        <% if @follower_profiles.any? %>
+          <% @follower_profiles.each do |follower_profile| %>
+            <div class="card my-4 shadow">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <span><%= follower_profile.nickname %></span>
+              </div>
+              <div class="card-body">
+                <% if follower_profile.introduction.present? %>
+                  <%= simple_format(follower_profile.introduction, { class: "card-text mb-0" }) %>
+                <% else %>
+                  <p class="text-body-secondary mb-0">まだ自己紹介はありません。</p>
+                <% end %>
+              </div>
+              <div class="card-footer bg-white border-top-0 d-flex align-items-center gap-2">
+                <%= link_to "プロフィールを見る", sns_profile_path(follower_profile), class: "btn btn-sm btn-primary" %>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-body-secondary my-4">まだフォロワーはいません。</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
