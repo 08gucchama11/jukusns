@@ -1,5 +1,4 @@
 class Sns::LikesController < Sns::ApplicationController
-
   def index
     @posts = current_sns_profile.liked_posts.includes(:sns_profile, :comments, :likes).order(created_at: :desc)
   end
