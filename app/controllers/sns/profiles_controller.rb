@@ -1,7 +1,7 @@
 class Sns::ProfilesController < Sns::ApplicationController
   def my_page
     @sns_profile = current_sns_profile
-    @posts = @sns_profile.posts.includes(:comments).order(created_at: :desc)
+    @posts = @sns_profile.posts.includes(:sns_profile, :comments, :likes).order(created_at: :desc)
   end
 
   def edit
@@ -10,7 +10,7 @@ class Sns::ProfilesController < Sns::ApplicationController
 
   def show
     @sns_profile = SnsProfile.find(params[:id])
-    @posts = @sns_profile.posts.includes(:comments).order(created_at: :desc)
+    @posts = @sns_profile.posts.includes(:sns_profile, :comments, :likes).order(created_at: :desc)
   end
 
   def update

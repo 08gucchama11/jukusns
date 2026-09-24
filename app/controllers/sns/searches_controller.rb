@@ -20,7 +20,7 @@ class Sns::SearchesController < Sns::ApplicationController
     # 「投稿本文」が選ばれ、キーワードが入力されている時だけ検索する
     elsif @target == "posts" && @q.present?
       # 投稿者とコメントも一緒に取得し、本文の部分一致で新しい順に並べる
-      @posts = Post.includes(:sns_profile, :comments) .where("body LIKE ?", "%#{@q}%") .order(created_at: :desc)
+      @posts = Post.includes(:sns_profile, :comments, :likes) .where("body LIKE ?", "%#{@q}%") .order(created_at: :desc)
     end
   end
 end
